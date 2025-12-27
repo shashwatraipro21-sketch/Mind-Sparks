@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mind Sparks | NEET & JEE 2027</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== COLOR SYSTEM ===== */
+:root{
+  --bg-dark:#0e1624;          /* dark blue-gray */
+  --bg-mid:#162235;           /* slightly lighter blue-gray */
+  --card:#1b2a40;             /* cards */
+  --text-main:#ffffff;
+  --text-soft:#cfd8e3;
+  --accent-blue:#4da3ff;
+  --accent-orange:#ff9f43;
+}
+
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(120deg,var(--bg-dark),var(--bg-mid),var(--bg-dark));
+  color:var(--text-main);
+  overflow-x:hidden;
+}
+
+/* ===== MOVING BACKGROUND ===== */
+.bg-motion{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(77,163,255,.25),transparent 40%),
+    radial-gradient(circle at 85% 30%,rgba(255,159,67,.22),transparent 45%),
+    radial-gradient(circle at 50% 80%,rgba(77,163,255,.18),transparent 45%);
+  animation:bgMove 22s ease-in-out infinite alternate;
+  z-index:-3;
+}
+
+@keyframes bgMove{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(15deg)}
+}
+
+/* Floating orbs */
+.orbs span{
+  position:fixed;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.18;
+  animation:float 45s infinite alternate ease-in-out;
+  z-index:-2;
+}
+
+.orbs span:nth-child(1){
+  background:var(--accent-blue);
+  top:-12%; left:-10%;
+}
+.orbs span:nth-child(2){
+  background:var(--accent-orange);
+  bottom:-15%; right:-12%;
+  animation-duration:55s;
+}
+.orbs span:nth-child(3){
+  background:var(--accent-blue);
+  top:35%; left:50%;
+  animation-duration:65s;
+}
+
+@keyframes float{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(140px,90px) scale(1.18)}
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px 90px;
+  text-align:center;
+}
+
+h1{
+  font-size:clamp(2.2rem,4vw,2.8rem);
+  font-weight:700;
+}
+
+.subtitle{
+  color:var(--text-soft);
+  margin:14px auto 42px;
+  max-width:760px;
+  line-height:1.7;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+
+.card{
+  background:linear-gradient(180deg,var(--card),#152235);
+  border-radius:26px;
+  padding:36px 28px;
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+  transition:.4s;
+}
+
+@media(hover:hover){
+  .card:hover{
+    transform:translateY(-14px);
+    box-shadow:0 45px 90px rgba(0,0,0,.7);
+  }
+}
+
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#fff;
+  padding:6px;
+  margin-bottom:18px;
+}
+
+.card h2{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:var(--text-soft);
+  line-height:1.65;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+  margin-top:26px;
+  padding:15px 36px;
+  border:none;
+  border-radius:999px;
+  font-size:1rem;
+  font-weight:600;
+  color:#fff;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--accent-blue),#2563eb);
+  transition:.25s;
+}
+
+.btn.secondary{
+  background:linear-gradient(135deg,var(--accent-orange),#ff7a18);
+}
+
+.btn:active{transform:scale(.94)}
+
+/* ===== JOIN SUCCESS (TOP-NOTCH) ===== */
+.join-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(14,22,36,.78);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  z-index:50;
+}
+
+.join-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.join-box{
+  background:linear-gradient(180deg,#1b2a40,#0e1624);
+  border-radius:30px;
+  padding:42px 44px;
+  text-align:center;
+  max-width:360px;
+  box-shadow:0 50px 120px rgba(0,0,0,.8);
+  animation:successPop .6s ease;
+}
+
+@keyframes successPop{
+  0%{transform:scale(.6);opacity:0}
+  60%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+
+.tick{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent-blue),var(--accent-orange));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  margin:0 auto 20px;
+}
+
+footer{
+  margin-top:70px;
+  color:var(--text-soft);
+  font-size:.9rem;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .btn{width:100%; font-size:1.05rem}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-motion"></div>
+<div class="orbs">
+  <span></span><span></span><span></span>
+</div>
+
+<!-- Join Success -->
+<div id="joinOverlay" class="join-overlay">
+  <div class="join-box">
+    <div class="tick">✔</div>
+    <h3>Successfully Joined</h3>
+    <p style="margin-top:10px;color:var(--text-soft)">
+      Welcome to Mind Sparks 🚀<br>
+      You’re not alone anymore.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Mind Sparks 📚✨</h1>
+
+  <!-- CHANNEL INFO (YOUR PARA, REFINED BUT SAME MEANING) -->
+  <div class="subtitle">
+    Feeling exam pressure? 😓<br>
+    Low confidence? No focus in studies?
+    <br><br>
+    <strong>Mind Sparks</strong> is here to help you:
+    <br>
+    • Stay motivated daily<br>
+    • Build discipline & confidence<br>
+    • Never feel alone in your journey
+    <br><br>
+    🌱 Join & grow with us — NEET & JEE 2027
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <img src="C:\Users\atuly\OneDrive\Desktop\photo_2025-12-27_07-07-29.jpg" class="logo">
+      <h2>Telegram Channel</h2>
+      <p>
+        🚫 No fake positivity<br>
+🔔 Stay consistent<br>
+🔥 Believe in yourself<br>
+      </p>
+      <button class="btn" onclick="joinNow('YOUR_CHANNEL_LINK')">
+        Join Channel
+      </button>
+    </div>
+
+    <div class="card">
+      <img src="C:\Users\atuly\Downloads\Telegram Desktop\photo_2025-12-27_15-35-31.jpg" class="logo">
+      <h2>Group Chat</h2>
+      <p>
+        🧠 Doubt solving & concept clarity<br>
+🤝 Healthy peer support <br>
+📈 Growth-focused discussions      </p>
+      <button class="btn secondary" onclick="joinNow('YOUR_GROUP_LINK')">
+        Join Group
+      </button>
+    </div>
+
+  </div>
+
+  <footer>
+    Built calmly for aspirants • 2027 Batch 💙
+  </footer>
+</div>
+
+<script>
+function joinNow(link){
+  const overlay=document.getElementById("joinOverlay");
+  overlay.classList.add("show");
+
+  setTimeout(()=>{ window.open(link,"_blank"); },900);
+  setTimeout(()=>{ overlay.classList.remove("show"); },2800);
+}
+</script>
+
+</body>
+</html>
